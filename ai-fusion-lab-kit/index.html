@@ -222,6 +222,85 @@
             text-decoration: underline;
         }
 
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+        }
+
+        .modal-overlay.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal {
+            background-color: var(--bg-card);
+            border-radius: 12px;
+            max-width: 500px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .modal-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin: 0;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--text-secondary);
+            padding: 0;
+            line-height: 1;
+        }
+
+        .modal-close:hover {
+            color: var(--text-primary);
+        }
+
+        .modal-body {
+            padding: 20px;
+        }
+
+        .modal-body h2 {
+            font-size: 16px;
+            color: var(--primary-color);
+            margin: 20px 0 8px 0;
+        }
+
+        .modal-body h2:first-child {
+            margin-top: 0;
+        }
+
+        .modal-body ul {
+            margin: 0;
+            padding-left: 20px;
+            color: var(--text-secondary);
+        }
+
+        .modal-body li {
+            margin-bottom: 4px;
+        }
+
         @media (max-width: 768px) {
             .card-hero {
                 flex-direction: column-reverse;
@@ -269,7 +348,7 @@
     <div class="card card-section">
         <div class="section-header">
             <h2 class="section-title">Image</h2>
-            <a href="https://drive.google.com/file/d/1YiPXtmzyakCKEeTqyKz8b_vQkCVJds-p/view" target="_blank" class="btn btn-download">
+            <a href="https://drive.google.com/file/d/1B7dzJQyZtEovlGNX-tnw0BPtLrrMSNIA/view?usp=drive_link" target="_blank" class="btn btn-download">
                 ↓ Download
             </a>
         </div>
@@ -280,15 +359,15 @@
         <div class="info-grid">
             <div class="info-item">
                 <span class="label">Base System</span>
-                <span class="value">Raspberry Pi OS bookworm 64-bit full version 2025.22.24</span>
+                <span class="value">Raspberry Pi OS bookworm 64-bit full version 2025.11.24</span>
             </div>
             <div class="info-item">
                 <span class="label">Version</span>
-                <span class="value">0.0.1 &nbsp; <a href="CHANGELOG.md">Changelog</a></span>
+                <span class="value">0.1.0 &nbsp; <a href="javascript:void(0)" onclick="showChangelog()">Changelog</a></span>
             </div>
             <div class="info-item">
                 <span class="label">Modified</span>
-                <span class="value">March 20, 2026</span>
+                <span class="value">April 8, 2026</span>
             </div>
             <div class="info-item">
                 <span class="label">Hostname</span>
@@ -301,6 +380,18 @@
             <div class="info-item">
                 <span class="label">Password</span>
                 <span class="value">123456</span>
+            </div>
+            <div class="info-item">
+                <span class="label">History</span>
+                <span class="value">
+                    <a href="javascript:void(0)" onclick="toggleHistory()" id="historyToggle">Show</a>
+                </span>
+            </div>
+            <div class="info-item" id="historyRow" style="display: none;">
+                <span class="label"></span>
+                <span class="value">
+                    0.0.1 (2026-03-20) &nbsp; <a href="https://drive.google.com/file/d/1YiPXtmzyakCKEeTqyKz8b_vQkCVJds-p/view" target="_blank">Download</a>
+                </span>
             </div>
         </div>
     </div>
@@ -316,6 +407,50 @@
         <p class="description">
             Explore example projects and tutorials to get started with AI Fusion Lab Kit.
         </p>
+    </div>
+
+    <script>
+        function toggleHistory() {
+            const row = document.getElementById('historyRow');
+            const toggle = document.getElementById('historyToggle');
+            if (row.style.display === 'none') {
+                row.style.display = 'flex';
+                toggle.textContent = 'Hide';
+            } else {
+                row.style.display = 'none';
+                toggle.textContent = 'Show';
+            }
+        }
+
+        function showChangelog() {
+            document.getElementById('changelogModal').classList.add('show');
+        }
+
+        function hideChangelog() {
+            document.getElementById('changelogModal').classList.remove('show');
+        }
+    </script>
+
+    <!-- Changelog Modal -->
+    <div class="modal-overlay" id="changelogModal" onclick="hideChangelog()">
+        <div class="modal" onclick="event.stopPropagation()">
+            <div class="modal-header">
+                <h3 class="modal-title">Changelog</h3>
+                <button class="modal-close" onclick="hideChangelog()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <h2>0.1.0 - 2026-04-08</h2>
+                <ul>
+                    <li>Fixed model permission issue</li>
+                    <li>Added YOLO dependencies</li>
+                    <li>Updated to latest ai-lab-kit code</li>
+                </ul>
+                <h2>0.0.1 - 2026-03-20</h2>
+                <ul>
+                    <li>First release</li>
+                </ul>
+            </div>
+        </div>
     </div>
 </body>
 </html>
