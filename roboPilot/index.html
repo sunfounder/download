@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-en="SunFounder Controller - Downloads" data-zh="SunFounder 控制器 - 下载">SunFounder Controller - Downloads
+    </title>
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --primary-hover: #1d4ed8;
+            --success-color: #10b981;
+            --success-hover: #059669;
+            --bg-page: #f8fafc;
+            --bg-card: #ffffff;
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+            --border-color: #e2e8f0;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            max-width: 960px;
+            margin: auto;
+            padding: 24px;
+            background-color: var(--bg-page);
+            color: var(--text-primary);
+            line-height: 1.5;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 24px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .back-link:hover {
+            color: var(--primary-color);
+        }
+
+        .back-link::before {
+            content: "←";
+            font-size: 16px;
+        }
+
+        .card {
+            background-color: var(--bg-card);
+            border-radius: 12px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.06);
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        .card-hero {
+            display: flex;
+            gap: 32px;
+            padding: 32px;
+        }
+
+        .card-hero .content {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .card-hero .image {
+            flex: 0 0 240px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+        }
+
+        .card-hero img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 12px;
+        }
+
+        .product-title {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin: 0 0 16px 0;
+            letter-spacing: -0.5px;
+        }
+
+        .feature-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .feature-list li {
+            padding: 4px 0 4px 24px;
+            position: relative;
+            color: var(--text-secondary);
+            font-size: 15px;
+            line-height: 1.5;
+        }
+
+        .feature-list li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            top: 8px;
+            color: var(--success-color);
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .card-section {
+            padding: 24px 32px;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 12px;
+        }
+
+        .section-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin: 0;
+        }
+
+        .badge-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            align-items: center;
+            margin-top: 10px;
+        }
+
+        .badge-link {
+            display: inline-block;
+            transition: transform 0.2s, box-shadow 0.2s;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .badge-link:hover {
+            transform: scale(1.05);
+        }
+
+        .badge-img {
+            height: 36px;
+            display: block;
+        }
+
+        .description {
+            color: var(--text-secondary);
+            margin: 0 0 20px 0;
+            font-size: 16px;
+        }
+
+        .changelog-link {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .changelog-link:hover {
+            text-decoration: underline;
+        }
+
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+        }
+
+        .modal-overlay.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal {
+            background-color: var(--bg-card);
+            border-radius: 12px;
+            max-width: 500px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .modal-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin: 0;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--text-secondary);
+            padding: 0;
+            line-height: 1;
+        }
+
+        .modal-close:hover {
+            color: var(--text-primary);
+        }
+
+        .modal-body {
+            padding: 20px;
+        }
+
+        .modal-body h2 {
+            font-size: 16px;
+            color: var(--primary-color);
+            margin: 20px 0 8px 0;
+        }
+
+        .modal-body h2:first-child {
+            margin-top: 0;
+        }
+
+        .modal-body ul {
+            margin: 0;
+            padding-left: 20px;
+            color: var(--text-secondary);
+        }
+
+        .modal-body li {
+            margin-bottom: 4px;
+        }
+
+        @media (max-width: 768px) {
+            .card-hero {
+                flex-direction: column-reverse;
+                padding: 24px;
+            }
+
+            .card-hero .image {
+                width: 100%;
+                flex: none;
+            }
+
+            .badge-container {
+                justify-content: space-between;
+                flex-wrap: nowrap;
+                gap: 8px;
+            }
+
+            .badge-link {
+                flex: 1 1 0;
+                min-width: 0;
+            }
+
+            .badge-img {
+                width: 100%;
+                height: auto;
+                max-height: 48px;
+                object-fit: contain;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <a href="../" class="back-link" data-en="Back to SunFounder Downloads" data-zh="返回 SunFounder 下载">Back to SunFounder
+        Downloads</a>
+
+    <div class="card card-hero">
+        <div class="content">
+            <h1 class="product-title">RoboPilot</h1>
+            <p class="description"
+                data-en="RoboPilot is your all-in-one mobile app for controlling SunFounder robots. Designed for smooth control and immersive experience, putting robot mastery at your fingertips."
+                data-zh="RoboPilot 是你操控 SunFounder 机器人的一站式移动应用。专为流畅操控和沉浸式体验设计，让机器人掌控尽在指尖。">RoboPilot 是你操控 SunFounder
+                机器人的一站式移动应用。专为流畅操控和沉浸式体验设计，让机器人掌控尽在指尖。</p>
+            <p class="description">
+                <span data-en="Version: 1.0.2" data-zh="当前版本：1.0.2">当前版本：1.0.2</span> &nbsp;
+                <a href="javascript:void(0)" onclick="showChangelog()" class="changelog-link" data-en="Changelog"
+                    data-zh="更新日志">更新日志</a>
+            </p>
+            <div class="badge-container">
+                <a href="https://apps.apple.com/cn/app/robopilot/id6575376418" target="_blank" class="badge-link">
+                    <img src="../app-store-badge.png" alt="Download on the App Store" class="badge-img">
+                </a>
+                <a href="https://play.google.com/store/apps/details?id=com.sunfounder.robopilot" target="_blank"
+                    class="badge-link">
+                    <img src="../google-play-badge.png" alt="Get it on Google Play" class="badge-img">
+                </a>
+                <a href="https://github.com/sunfounder/download/releases/download/roboPilot-1.0.2/roboPilot-1.0.2.apk"
+                    class="badge-link" data-en="APK Download" data-zh="APK 下载">
+                </a>
+            </div>
+        </div>
+        <div class="image">
+            <img src="main.png" alt="RoboPilot Logo">
+        </div>
+    </div>
+
+    <!-- Changelog Modal -->
+    <div class="modal-overlay" id="changelogModal" onclick="hideChangelog()">
+        <div class="modal" onclick="event.stopPropagation()">
+            <div class="modal-header">
+                <h3 class="modal-title" data-en="Changelog" data-zh="更新日志">更新日志</h3>
+                <button class="modal-close" onclick="hideChangelog()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <h2>1.0.2</h2>
+                <ul>
+                    <li data-en="Optimized the reminder for failed robot connections" data-zh="优化连接机器人失败的提醒">
+                        优化连接机器人失败的提醒</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <script>
+        function showChangelog() {
+            document.getElementById('changelogModal').classList.add('show');
+        }
+
+        function hideChangelog() {
+            document.getElementById('changelogModal').classList.remove('show');
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            var userLang = navigator.language || navigator.userLanguage;
+            var isZh = userLang.startsWith('zh');
+            var elements = document.querySelectorAll('[data-en][data-zh]');
+            elements.forEach(function (el) {
+                el.innerHTML = isZh ? el.getAttribute('data-zh') : el.getAttribute('data-en');
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,33 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SunFounder Downloads</title>
+    <title data-en="SunFounder Downloads" data-zh="SunFounder 下载">SunFounder Downloads</title>
     <style>
         :root {
             --primary-color: #333;
             --primary-hover: #000;
         }
+
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            max-width: 800px;
+            max-width: 1200px;
             margin: 50px auto;
             padding: 20px;
             text-align: center;
             background-color: #fff;
         }
+
         h1 {
             color: #007bff;
             font-size: 36px;
         }
+
         .subtitle {
             color: #666;
             font-size: 18px;
             margin-bottom: 30px;
         }
+
         .product-image {
-            max-width: 400px;
+            min-width: 400px;
             width: 100%;
             height: auto;
             border-radius: 10px 10px 0 0;
@@ -36,8 +41,9 @@
             border-bottom: none;
             box-sizing: border-box;
         }
+
         .product-card {
-            display: inline-block;
+            display: block;
             background-color: white;
             border: 2px solid #007bff;
             border-radius: 10px;
@@ -47,11 +53,14 @@
             color: inherit;
             transition: transform 0.2s, box-shadow 0.2s;
             max-width: 400px;
+            width: 100%;
         }
+
         .product-card:hover {
             transform: translateY(-2px);
             box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
         }
+
         .product-card .btn {
             display: block;
             padding: 15px 30px;
@@ -64,41 +73,62 @@
             border-top: 2px solid #007bff;
             border-radius: 0 0 8px 8px;
         }
+
         .product-card:hover .btn {
             background-color: #007bff;
             color: white;
         }
-        .product-list {
+
+        .card-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
             list-style: none;
             padding: 0;
+            margin: 30px 0;
         }
-        .product-list li {
-            margin: 20px 0;
-        }
-        .product-list a {
-            display: inline-block;
-            padding: 20px 40px;
-            background-color: #007bff;
-            color: white;
-            text-decoration: none;
-            border-radius: 8px;
-            font-size: 20px;
-            font-weight: bold;
-            transition: background-color 0.3s, transform 0.2s;
-            box-shadow: 0 4px 6px rgba(0, 123, 255, 0.3);
-        }
-        .product-list a:hover {
-            background-color: #0056b3;
-            transform: translateY(-2px);
+
+        .card-list li {
+            display: flex;
+            justify-content: center;
         }
     </style>
 </head>
+
 <body>
-    <h1>SunFounder Downloads</h1>
-    <p class="subtitle">Welcome to the SunFounder download page</p>
-    <a href="ai-fusion-lab-kit/index.html" class="product-card">
-        <img src="ai-fusion-lab-kit/main.png" alt="AI Fusion Lab Kit" class="product-image">
-        <span class="btn">AI Fusion Lab Kit</span>
-    </a>
+    <h1 data-en="SunFounder Downloads" data-zh="SunFounder 下载">SunFounder Downloads</h1>
+    <p class="subtitle" data-en="Welcome to the SunFounder download page" data-zh="欢迎来到 SunFounder 下载页面">Welcome to the SunFounder download page</p>
+    <ul class="card-list">
+        <li>
+            <a href="ai-fusion-lab-kit/index.html" class="product-card">
+                <img src="ai-fusion-lab-kit/main.png" alt="AI Fusion Lab Kit" class="product-image">
+                <span class="btn">AI Fusion Lab Kit</span>
+            </a>
+        </li>
+        <li>
+            <a href="roboPilot/index.html" class="product-card">
+                <img src="roboPilot/main.png" alt="RoboPilot" class="product-image">
+                <span class="btn">RoboPilot</span>
+            </a>
+        </li>
+        <li>
+            <a href="mammoth-coding/index.html" class="product-card">
+                <img src="mammoth-coding/main.png" alt="Mammoth Coding" class="product-image">
+                <span class="btn" data-en="Mammoth Coding" data-zh="长毛象编程">Mammoth Coding</span>
+            </a>
+        </li>
+    </ul>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var userLang = navigator.language || navigator.userLanguage;
+            var isZh = userLang.startsWith('zh');
+            var elements = document.querySelectorAll('[data-en][data-zh]');
+            elements.forEach(function(el) {
+                el.innerHTML = isZh ? el.getAttribute('data-zh') : el.getAttribute('data-en');
+            });
+        });
+    </script>
 </body>
+
 </html>
