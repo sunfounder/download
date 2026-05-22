@@ -93,10 +93,31 @@
             display: flex;
             justify-content: center;
         }
+        .lang-toggle {
+            position: fixed;
+            top: 16px;
+            right: 16px;
+            z-index: 999;
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            padding: 6px 12px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            color: #333;
+            transition: all 0.2s;
+        }
+        .lang-toggle:hover {
+            background: #007bff;
+            color: #fff;
+            border-color: #007bff;
+        }
     </style>
 </head>
 
 <body>
+    <button class="lang-toggle" id="langToggle" onclick="toggleLang()">EN</button>
     <h1 data-en="SunFounder Downloads" data-zh="SunFounder 下载">SunFounder Downloads</h1>
     <p class="subtitle" data-en="Welcome to the SunFounder download page" data-zh="欢迎来到 SunFounder 下载页面">Welcome to the SunFounder download page</p>
     <ul class="card-list">
@@ -120,12 +141,38 @@
         </li>
     </ul>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        function getLang() {
+            var params = new URLSearchParams(window.location.search);
+            var urlLang = params.get('lang');
+            if (urlLang === 'zh' || urlLang === 'en') return urlLang;
             var userLang = navigator.language || navigator.userLanguage;
-            var isZh = userLang.startsWith('zh');
+            return userLang.startsWith('zh') ? 'zh' : 'en';
+        }
+
+        function toggleLang() {
+            var currentLang = getLang();
+            var newLang = currentLang === 'zh' ? 'en' : 'zh';
+            var url = new URL(window.location);
+            url.searchParams.set('lang', newLang);
+            window.location.href = url.toString();
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            var lang = getLang();
+            var isZh = lang === 'zh';
             var elements = document.querySelectorAll('[data-en][data-zh]');
             elements.forEach(function(el) {
                 el.innerHTML = isZh ? el.getAttribute('data-zh') : el.getAttribute('data-en');
+            });
+            document.getElementById('langToggle').textContent = isZh ? 'EN' : '中文';
+
+            var links = document.querySelectorAll('a[href]');
+            links.forEach(function(a) {
+                var href = a.getAttribute('href');
+                if (href && !/^(https?:|javascript:|#)/.test(href)) {
+                    var sep = href.indexOf('?') === -1 ? '?' : '&';
+                    a.href = href + sep + 'lang=' + lang;
+                }
             });
         });
     </script>
