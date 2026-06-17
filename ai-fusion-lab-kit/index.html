@@ -164,6 +164,18 @@
             transform: translateY(-1px);
         }
 
+        .btn-backup {
+            background-color: transparent;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+        }
+
+        .btn-backup:hover {
+            background-color: var(--primary-color);
+            color: white;
+            transform: translateY(-1px);
+        }
+
         .btn-github {
             background-color: #1e293b;
             color: white;
@@ -171,6 +183,12 @@
 
         .btn-github:hover {
             background-color: #0f172a;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
         }
 
         .description {
@@ -369,9 +387,14 @@
     <div class="card card-section">
         <div class="section-header">
             <h2 class="section-title" data-en="Image" data-zh="系统镜像">Image</h2>
-            <a href="https://drive.google.com/file/d/192KsVETGMd-UqaVBuT7cEXmORI15E_we/view" target="_blank" class="btn btn-download" data-en="↓ Download" data-zh="↓ 下载">
-                ↓ Download
-            </a>
+            <div class="btn-group">
+                <a href="https://drive.google.com/file/d/1NQeHWBJsHIT5hpIv9h79r2kBq1BSRaj0/view?usp=sharing" target="_blank" class="btn btn-backup" data-en="↓ Mirror" data-zh="↓ 备用下载">
+                    ↓ 备用下载
+                </a>
+                <a href="https://drive.google.com/file/d/192KsVETGMd-UqaVBuT7cEXmORI15E_we/view" target="_blank" class="btn btn-download" data-en="↓ Download" data-zh="↓ 下载">
+                    ↓ Download
+                </a>
+            </div>
         </div>
         <p class="description" data-en="Pre-installed Raspberry Pi image with all required dependencies. Ready to use out of the box - no additional setup needed." data-zh="预装了所有必需依赖项的树莓派镜像。开箱即用 - 无需额外设置。">
             Pre-installed Raspberry Pi image with all required dependencies.
